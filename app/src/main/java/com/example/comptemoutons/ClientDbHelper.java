@@ -6,10 +6,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ClientDbHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "mouton.db";
 
-    public final String SQL_CREATE = "CREATE TABLE User (id INTEGER PRIMARY KEY, pwd TEXT);";
+    public final String SQL_CREATE = "CREATE TABLE IF NOT EXISTS User (idU INTEGER PRIMARY KEY, pwd TEXT); CREATE TABLE Mouton (idM INTEGER, nom TEXT, poids REAL, taille REAL); ";
     public final String SQL_DELETE = "DROP TABLE IF EXISTS Clients;";
 
     public ClientDbHelper(Context context) {

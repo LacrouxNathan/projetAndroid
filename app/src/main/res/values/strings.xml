@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Compte-Moutons</string>
     <string name="labelPwd">Mot de passe</string>
+    <string name="btnConnexion">Se connecter</string>
 </resources>
