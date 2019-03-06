@@ -1,6 +1,7 @@
 package com.example.comptemoutons;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -46,9 +47,10 @@ public class Connexion extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 EditText et = findViewById(R.id.editPwd);
-                if (checkPassword(et.getText().toString())) {
-                    Toast.makeText(view.getContext(),"VRAI",Toast.LENGTH_LONG).show();
-                }
+                if (checkPassword(et.getText().toString()))
+                    startActivity(new Intent(view.getContext(),Accueil.class));
+                else
+                    Toast.makeText(view.getContext(),"Le mot de passe est erroné, les moutons ne seront pas comptés :(",Toast.LENGTH_LONG).show();
             }
         });
 

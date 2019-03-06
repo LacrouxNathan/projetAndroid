@@ -2,4 +2,7 @@
     <string name="app_name">Compte-Moutons</string>
     <string name="labelPwd">Mot de passe</string>
     <string name="btnConnexion">Se connecter</string>
+    <string name="labelDate">Date</string>
+    <string name="labelNumber">Nombre</string>
+    <string name="labelImage">Image</string>
 </resources>
