@@ -1,8 +1,17 @@
 <resources>
-    <string name="app_name">Compte-Moutons</string>
+    <string name="app_name">CompteMoutons</string>
     <string name="labelPwd">Mot de passe</string>
     <string name="btnConnexion">Se connecter</string>
     <string name="labelDate">Date</string>
     <string name="labelNumber">Nombre</string>
     <string name="labelImage">Image</string>
+    <string name="menuDeconnexion">Se déconnecter</string>
+    <string name="menuAbout">À Propos</string>
+    <string name="titleAbout">À Propos</string>
+    <string name="titleAjouter">Ajouter un troupeau</string>
+    <string name="titleAccueil">Accueil</string>
+    <string name="titleConnexion">Connexion</string>
+    <string name="labelTaille">Veuillez estimer la taille du troupeau</string>
+    <string name="labelPhoto">Veuillez joindre une photo du troupeau</string>
+    <string name="btnPhoto">Photo...</string>
 </resources>

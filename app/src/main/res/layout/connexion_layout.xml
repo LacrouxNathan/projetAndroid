@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".Connexion">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="160dp"
+        android:layout_height="155dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/editPwd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/sheep_purple" />
+
     <EditText
         android:id="@+id/editPwd"
         android:layout_width="wrap_content"
@@ -27,27 +41,16 @@
         app:layout_constraintHorizontal_bias="0.30"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/buttonConnexion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="100dp"
-        android:text="@string/btnConnexion"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:focusable="true"
+        android:src="@drawable/baseline_done_white_18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="160dp"
-        android:layout_height="155dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/editPwd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/sheep" />
+    
 </android.support.constraint.ConstraintLayout>

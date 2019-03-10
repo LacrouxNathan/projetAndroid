@@ -23,6 +23,7 @@ public class Connexion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.connexion_layout);
+        setTitle(R.string.titleConnexion);
 
         SQLiteDatabase db = new ClientDbHelper(this).getReadableDatabase();
 
@@ -42,7 +43,7 @@ public class Connexion extends AppCompatActivity {
 
         String pwd = curs.getString(curs.getColumnIndexOrThrow("pwd"));
 
-        final Button btnConnexion = findViewById(R.id.buttonConnexion);
+        final android.support.design.widget.FloatingActionButton btnConnexion = findViewById(R.id.buttonConnexion);
         btnConnexion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +60,12 @@ public class Connexion extends AppCompatActivity {
         db.close();
     }
 
-    public boolean checkPassword(String pwd) {
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
+     private boolean checkPassword(String pwd) {
 
         MessageDigest m = null;
 
