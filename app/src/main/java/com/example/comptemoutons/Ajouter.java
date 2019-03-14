@@ -41,7 +41,7 @@ public class Ajouter extends AppCompatActivity {
 
                 // Génération de nombre aléatoire
                 Random r = new Random();
-                int tailleTroupeau = r.nextInt(11) + tailleChoisie-5;
+                int tailleTroupeau = r.nextInt(21) + tailleChoisie-5;
 
                 // Code de l'intent de retour
                 Intent intentRetour = new Intent();

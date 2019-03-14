@@ -6,11 +6,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ClientDbHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 4;
     public static final String DATABASE_NAME = "mouton.db";
 
-    public final String SQL_CREATE = "CREATE TABLE IF NOT EXISTS User (idU INTEGER PRIMARY KEY, pwd TEXT); CREATE TABLE Mouton (idM INTEGER, nom TEXT, poids REAL, taille REAL); ";
-    public final String SQL_DELETE = "DROP TABLE IF EXISTS Clients;";
+    public final String SQL_CREATE_USER = "CREATE TABLE IF NOT EXISTS User (idU INTEGER PRIMARY KEY, pwd TEXT);";
+    public final String SQL_CREATE_TROUPEAU = "CREATE TABLE IF NOT EXISTS Troupeau (idT INTEGER, dateT TEXT, photo BLOB, taille NUMBER);";
+
+    public final String SQL_DELETE_USER = "DROP TABLE IF EXISTS User;";
+    public final String SQL_DELETE_TROUPEAU = "DROP TABLE IF EXISTS Troupeau;";
 
     public ClientDbHelper(Context context) {
         super(context, DATABASE_NAME,null, DATABASE_VERSION);
@@ -18,12 +21,14 @@ public class ClientDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQL_CREATE);
+        db.execSQL(SQL_CREATE_USER);
+        db.execSQL(SQL_CREATE_TROUPEAU);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(SQL_DELETE);
+        db.execSQL(SQL_DELETE_USER);
+        db.execSQL(SQL_DELETE_TROUPEAU);
         onCreate(db);
     }
 }

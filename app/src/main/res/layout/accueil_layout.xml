@@ -17,9 +17,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ListView
+            android:id="@+id/listViewAccueil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:dividerHeight="1dp">
 
             <!--<android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
