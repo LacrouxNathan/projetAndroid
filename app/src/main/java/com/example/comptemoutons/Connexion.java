@@ -51,7 +51,7 @@ public class Connexion extends AppCompatActivity {
                 if (checkPassword(et.getText().toString()))
                     startActivity(new Intent(view.getContext(),Accueil.class));
                 else
-                    Toast.makeText(view.getContext(),"Le mot de passe est erroné, les moutons ne seront pas comptés :(",Toast.LENGTH_LONG).show();
+                    Toast.makeText(view.getContext(),"Le mot de passe est erroné, les moutons ne seront pas comptés :(",Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -10,7 +10,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
+
 public class Accueil extends AppCompatActivity {
+
+    static final int AJOUT_TROUPEAU = 5;
+    static final int AJOUTER_RETOUR = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +26,7 @@ public class Accueil extends AppCompatActivity {
         btnAjouter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(view.getContext(),Ajouter.class));
+                startActivityForResult(new Intent(view.getContext(),Ajouter.class),AJOUT_TROUPEAU);
             }
         });
 
@@ -51,6 +56,15 @@ public class Accueil extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == AJOUT_TROUPEAU) {
+            String tailleTroupeau = data.getStringExtra("tailleTroupeau");
+            Toast.makeText(this,"La taille du troupeau est de " + tailleTroupeau + " moutons",Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 }
