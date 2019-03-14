@@ -12,6 +12,7 @@ import java.util.Random;
 
 public class Ajouter extends AppCompatActivity {
 
+	private static final int ECART = 10;
     private static final int PICK_FROM_GALLARY = 1;
 
     @Override
@@ -41,7 +42,7 @@ public class Ajouter extends AppCompatActivity {
 
                 // Génération de nombre aléatoire
                 Random r = new Random();
-                int tailleTroupeau = r.nextInt(21) + tailleChoisie-5;
+                int tailleTroupeau = r.nextInt(ECART*2+1) + tailleChoisie-ECART;
 
                 // Code de l'intent de retour
                 Intent intentRetour = new Intent();
