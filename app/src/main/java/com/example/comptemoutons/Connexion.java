@@ -17,7 +17,10 @@ import java.security.NoSuchAlgorithmException;
 
 public class Connexion extends AppCompatActivity {
 
-    private static final String CIPHERED_PWD = "2dc38cc3282736325000b17b763c6ef"; // le mot de passe est $moutons
+    // le mot de passe est $moutons
+    private static final String CIPHERED_PWD = "2dc38cc3282736325000b17b763c6ef";
+    private SQLiteDatabase dbr; // db de lecture
+    private Cursor curs; // curseur de parcours
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,39 +28,37 @@ public class Connexion extends AppCompatActivity {
         setContentView(R.layout.connexion_layout);
         setTitle(R.string.titleConnexion);
 
-        SQLiteDatabase db = new ClientDbHelper(this).getReadableDatabase();
+        this.refreshDatabase();
+        assert(this.curs != null); // on s'assure que le refresh a bien été effectué
 
-        String[] col = {"idU", "pwd"};
-        String[] select = {};
-        Cursor curs = db.query("User", col, "", select, null, null, null);
-
-        if (!curs.moveToFirst()) {
+        // si il n'y a pas d'utilisateur enregistré
+        if (!this.curs.moveToFirst()) {
             SQLiteDatabase dbw = new ClientDbHelper(this).getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put("idU", 1);
-            values.put("pwd",CIPHERED_PWD);
+            values.put("pwd",CIPHERED_PWD); // enregistrement du mot de passe dans la BDD
             dbw.insert("User", null, values);
             dbw.close();
+            this.closeDatabase();
+            this.refreshDatabase();
+            assert(this.curs != null); // on s'assure que le refresh a bien été effectué
             curs.moveToFirst();
         }
 
-        String pwd = curs.getString(curs.getColumnIndexOrThrow("pwd"));
+        final String storedHashedPwd = curs.getString(curs.getColumnIndexOrThrow("pwd"));
 
         final android.support.design.widget.FloatingActionButton btnConnexion = findViewById(R.id.buttonConnexion);
         btnConnexion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EditText et = findViewById(R.id.editPwd);
-                if (checkPassword(et.getText().toString()))
+                if (checkPassword(storedHashedPwd,et.getText().toString()))
                     startActivity(new Intent(view.getContext(),Accueil.class));
                 else
-                    Toast.makeText(view.getContext(),"Le mot de passe est erroné, les moutons ne seront pas comptés :(",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(),R.string.textErrMdp,Toast.LENGTH_SHORT).show();
             }
         });
 
-
-        curs.close();
-        db.close();
+        this.closeDatabase();
     }
 
     @Override
@@ -65,8 +66,7 @@ public class Connexion extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
-     private boolean checkPassword(String pwd) {
-
+    private boolean checkPassword(String storedHashedPwd, String inputPwd) {
         MessageDigest m = null;
 
         try {
@@ -75,12 +75,23 @@ public class Connexion extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        m.update(pwd.getBytes(),0,pwd.length());
+        m.update(inputPwd.getBytes(),0,inputPwd.length());
         String hashPwd = new BigInteger(1,m.digest()).toString(16);
 
-        return hashPwd.equals(CIPHERED_PWD);
+        return hashPwd.equals(storedHashedPwd);
     }
 
+    private void refreshDatabase() {
+        this.dbr = new ClientDbHelper(this).getReadableDatabase();
 
+        String[] col = {"idU", "pwd"};
+        String[] select = {};
+        this.curs = dbr.query("User", col, "", select, null, null, null);
+    }
+
+    private void closeDatabase() {
+        this.curs.close();
+        this.dbr.close();
+    }
 
 }

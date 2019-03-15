@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Ajouter">
 
-
     <TextView
         android:id="@+id/labelPhoto"
         android:layout_width="wrap_content"
@@ -90,5 +89,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonPhoto" />
+
+    <ImageView
+        android:id="@+id/imageViewNouveauTroupeau"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupTaille"
+        app:srcCompat="?android:attr/panelBackground" />
 
 </android.support.constraint.ConstraintLayout>

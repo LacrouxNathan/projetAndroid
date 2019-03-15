@@ -1,7 +1,6 @@
 package com.example.comptemoutons;
 
 import android.Manifest;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -13,14 +12,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,6 +30,8 @@ public class Accueil extends AppCompatActivity {
     static final int AJOUTER_RETOUR = 6;
     private static final int REQUEST_PERMISSIONS = 24;
 
+    private ListAdapter listAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,57 +41,11 @@ public class Accueil extends AppCompatActivity {
         btnAjouter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                // Demande des permissions seulement si l'appareil a une version >= Android 6
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-                        checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSIONS);
-                } else {
-                    startActivityForResult(new Intent(view.getContext(),Ajouter.class),AJOUT_TROUPEAU);
-                }
-
+               clickBtnAjouter();
             }
         });
 
-        SQLiteDatabase db = new ClientDbHelper(this).getReadableDatabase();
-
-        String[] col = {"idT", "dateT", "photo", "taille"};
-        String[] select = {};
-        Cursor curs = db.query("Troupeau", col, "", select, null, null, null);
-
-        List<Map<String,String>> listeTroupeaux = new LinkedList<>();
-
-        if(curs.moveToFirst()) {
-            do {
-                Map<String,String> donneesTroupeau = new HashMap<>();
-                donneesTroupeau.put("idT",curs.getString(curs.getColumnIndexOrThrow("idT")));
-                donneesTroupeau.put("dateT",curs.getString(curs.getColumnIndexOrThrow("dateT")));
-                donneesTroupeau.put("photo",new String(curs.getBlob(curs.getColumnIndexOrThrow("photo")), StandardCharsets.UTF_8));
-                donneesTroupeau.put("taille",String.valueOf(curs.getInt(curs.getColumnIndexOrThrow("taille"))));
-
-                listeTroupeaux.add(donneesTroupeau);
-
-            } while(curs.moveToNext());
-        }
-
-        db.close();
-
-        ListView lv = (ListView) findViewById(R.id.listViewAccueil);
-
-        ListAdapter adapter = new SimpleAdapter(this, listeTroupeaux, R.layout.list_row,new String[]{"idT","dateT","photo","taille"},
-                new int[]{R.id.textViewIdT, R.id.textViewDateT, R.id.textViewPhoto, R.id.textViewTaille});
-        lv.setAdapter(adapter);
-
-        /*SQLiteDatabase dbw = new ClientDbHelper(this).getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("idT", 2);
-        values.put("dateT","15/03/2019");
-        byte[] photo = {Byte.MAX_VALUE,Byte.MIN_VALUE,Byte.MAX_VALUE};
-        values.put("photo",photo);
-        values.put("taille",35);
-        dbw.insert("Troupeau", null, values);
-        dbw.close();*/
+       updateListView();
 
     }
 
@@ -125,10 +78,52 @@ public class Accueil extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == AJOUT_TROUPEAU) {
+            updateListView();
             String tailleTroupeau = data.getStringExtra("tailleTroupeau");
             Toast.makeText(this,"La taille du troupeau est de " + tailleTroupeau + " moutons",Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void clickBtnAjouter() {
+        // Demande des permissions seulement si l'appareil a une version >= Android 6
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSIONS);
+        } else {
+            startActivityForResult(new Intent(Accueil.this,Ajouter.class),AJOUT_TROUPEAU);
+        }
+    }
+
+    private void updateListView() {
+        SQLiteDatabase dbr = new ClientDbHelper(this).getReadableDatabase();
+
+        String[] col = {"idT", "dateT", "photo", "taille"};
+        String[] select = {};
+        Cursor curs = dbr.query("Troupeau", col, "", select, null, null, null);
+
+        List<Map<String,String>> listeTroupeaux = new LinkedList<>();
+
+        if(curs.moveToFirst()) {
+            do {
+                Map<String,String> donneesTroupeau = new HashMap<>();
+                donneesTroupeau.put("idT",curs.getString(curs.getColumnIndexOrThrow("idT")));
+                donneesTroupeau.put("dateT",curs.getString(curs.getColumnIndexOrThrow("dateT")));
+                donneesTroupeau.put("photo",new String(curs.getBlob(curs.getColumnIndexOrThrow("photo")), StandardCharsets.UTF_8));
+                donneesTroupeau.put("taille",String.valueOf(curs.getInt(curs.getColumnIndexOrThrow("taille"))));
+
+                listeTroupeaux.add(donneesTroupeau);
+
+            } while(curs.moveToNext());
+        }
+        dbr.close();
+
+        ListView lv = (ListView) findViewById(R.id.listViewAccueil);
+
+        this.listAdapter = new SimpleAdapter(this, listeTroupeaux, R.layout.list_row,new String[]{"idT","dateT","photo","taille"},
+                new int[]{R.id.textViewIdT, R.id.textViewDateT, R.id.textViewPhoto, R.id.textViewTaille});
+        lv.setAdapter(this.listAdapter);
     }
 
 }
