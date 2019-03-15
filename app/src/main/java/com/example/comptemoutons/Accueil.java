@@ -1,9 +1,12 @@
 package com.example.comptemoutons;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,6 +31,7 @@ public class Accueil extends AppCompatActivity {
 
     static final int AJOUT_TROUPEAU = 5;
     static final int AJOUTER_RETOUR = 6;
+    private static final int REQUEST_PERMISSIONS = 24;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +42,16 @@ public class Accueil extends AppCompatActivity {
         btnAjouter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(view.getContext(),Ajouter.class),AJOUT_TROUPEAU);
+
+                // Demande des permissions seulement si l'appareil a une version >= Android 6
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                        checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSIONS);
+                } else {
+                    startActivityForResult(new Intent(view.getContext(),Ajouter.class),AJOUT_TROUPEAU);
+                }
+
             }
         });
 

@@ -1,6 +1,7 @@
 package com.example.comptemoutons;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,7 @@ import java.util.Random;
 public class Ajouter extends AppCompatActivity {
 
 	private static final int ECART = 10;
-    private static final int PICK_FROM_GALLARY = 1;
+    private static final int REQUEST_IMAGE = 42;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +25,7 @@ public class Ajouter extends AppCompatActivity {
         btnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(galleryIntent, PICK_FROM_GALLARY);
+                selectImage();
             }
         });
 
@@ -53,13 +53,22 @@ public class Ajouter extends AppCompatActivity {
             }
         });
 
+    }
 
+    private void selectImage() {
+        Intent takeImageIntent = ImagePicker.getPickImageIntent(this);
+        if (takeImageIntent.resolveActivity(this.getPackageManager()) != null) {
+            startActivityForResult(takeImageIntent, REQUEST_IMAGE);
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        System.out.println("il faut désormais traiter la photo");
+        Bitmap bitmap = ImagePicker.getBitmapFromResult(this,resultCode,data);
+        if (null != bitmap && resultCode == RESULT_OK) {
+            System.out.println("il faut désormais traiter l'ajout");
+        }
 
     }
 
