@@ -50,18 +50,19 @@ public class Accueil extends AppCompatActivity {
 
         List<Map<String,String>> listeTroupeaux = new LinkedList<>();
 
-        curs.moveToFirst();
+        if(curs.moveToFirst()) {
+            do {
+                Map<String,String> donneesTroupeau = new HashMap<>();
+                donneesTroupeau.put("idT",curs.getString(curs.getColumnIndexOrThrow("idT")));
+                donneesTroupeau.put("dateT",curs.getString(curs.getColumnIndexOrThrow("dateT")));
+                donneesTroupeau.put("photo",new String(curs.getBlob(curs.getColumnIndexOrThrow("photo")), StandardCharsets.UTF_8));
+                donneesTroupeau.put("taille",String.valueOf(curs.getInt(curs.getColumnIndexOrThrow("taille"))));
 
-        do {
-            Map<String,String> donneesTroupeau = new HashMap<>();
-            donneesTroupeau.put("idT",curs.getString(curs.getColumnIndexOrThrow("idT")));
-            donneesTroupeau.put("dateT",curs.getString(curs.getColumnIndexOrThrow("dateT")));
-            donneesTroupeau.put("photo",new String(curs.getBlob(curs.getColumnIndexOrThrow("photo")), StandardCharsets.UTF_8));
-            donneesTroupeau.put("taille",String.valueOf(curs.getInt(curs.getColumnIndexOrThrow("taille"))));
+                listeTroupeaux.add(donneesTroupeau);
 
-            listeTroupeaux.add(donneesTroupeau);
+            } while(curs.moveToNext());
+        }
 
-        } while(curs.moveToNext());
         db.close();
 
         ListView lv = (ListView) findViewById(R.id.listViewAccueil);
@@ -70,7 +71,7 @@ public class Accueil extends AppCompatActivity {
                 new int[]{R.id.textViewIdT, R.id.textViewDateT, R.id.textViewPhoto, R.id.textViewTaille});
         lv.setAdapter(adapter);
 
-        /*SQLiteDatabase dbw = new ClientDbHelper(this).getWritableDatabase(); // Change
+        /*SQLiteDatabase dbw = new ClientDbHelper(this).getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("idT", 2);
         values.put("dateT","15/03/2019");

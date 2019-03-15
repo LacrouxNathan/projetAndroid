@@ -32,7 +32,7 @@ public class Connexion extends AppCompatActivity {
         Cursor curs = db.query("User", col, "", select, null, null, null);
 
         if (!curs.moveToFirst()) {
-            SQLiteDatabase dbw = new ClientDbHelper(this).getWritableDatabase(); // Change
+            SQLiteDatabase dbw = new ClientDbHelper(this).getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put("idU", 1);
             values.put("pwd",CIPHERED_PWD);

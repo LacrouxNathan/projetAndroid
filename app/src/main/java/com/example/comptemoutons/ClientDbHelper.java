@@ -6,11 +6,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ClientDbHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 5;
     public static final String DATABASE_NAME = "mouton.db";
 
     public final String SQL_CREATE_USER = "CREATE TABLE IF NOT EXISTS User (idU INTEGER PRIMARY KEY, pwd TEXT);";
-    public final String SQL_CREATE_TROUPEAU = "CREATE TABLE IF NOT EXISTS Troupeau (idT INTEGER, dateT TEXT, photo BLOB, taille NUMBER);";
+    public final String SQL_CREATE_TROUPEAU = "CREATE TABLE IF NOT EXISTS Troupeau (idT INTEGER PRIMARY KEY, dateT TEXT, photo BLOB, taille NUMBER);";
 
     public final String SQL_DELETE_USER = "DROP TABLE IF EXISTS User;";
     public final String SQL_DELETE_TROUPEAU = "DROP TABLE IF EXISTS Troupeau;";
