@@ -14,4 +14,8 @@
     <string name="labelTaille">Veuillez estimer la taille du troupeau</string>
     <string name="labelPhoto">Veuillez joindre une photo du troupeau</string>
     <string name="btnPhoto">Photo...</string>
+    <string name="textHeaderIdt">#</string>
+    <string name="textHeaderDateT">Date</string>
+    <string name="textHeaderPhoto">Photo</string>
+    <string name="textHeaderTaille">Taille</string>
 </resources>

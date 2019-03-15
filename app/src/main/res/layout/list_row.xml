@@ -34,7 +34,7 @@
     <TextView
         android:id="@+id/textViewPhoto"
         android:layout_width="0dp"
-        android:layout_weight="50"
+        android:layout_weight="45"
         android:layout_height="wrap_content"
         android:textSize="17sp"
         android:textStyle="bold"
@@ -47,7 +47,7 @@
     <TextView
         android:id="@+id/textViewTaille"
         android:layout_width="0dp"
-        android:layout_weight="10"
+        android:layout_weight="15"
         android:layout_height="wrap_content"
         android:textSize="17sp"
         android:textStyle="bold"

@@ -1,28 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent"
     tools:context=".Accueil">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dip"
+        android:weightSum="100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewHeaderIdT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="10"
+            android:textAlignment="center"
+            android:textSize="17sp"
+            android:textStyle="bold|italic"
+            android:text="@string/textHeaderIdt"/>
+
+        <TextView
+            android:id="@+id/textViewHeaderDateT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="30"
+            android:textAlignment="center"
+            android:textSize="17sp"
+            android:textStyle="bold|italic"
+            android:text="@string/textHeaderDateT"/>
+
+        <TextView
+            android:id="@+id/textViewHeaderPhoto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="45"
+            android:textAlignment="center"
+            android:textSize="17sp"
+            android:textStyle="bold|italic"
+            android:text="@string/textHeaderPhoto"/>
+
+        <TextView
+            android:id="@+id/textViewHeaderTaille"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="15"
+            android:textAlignment="center"
+            android:textSize="17sp"
+            android:textStyle="bold|italic"
+            android:text="@string/textHeaderTaille"/>
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/listViewAccueil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:dividerHeight="1dp">
-
+        android:dividerHeight="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
     </ListView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/buttonAjouter"
+        android:src="@drawable/baseline_add_white_18dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:focusable="true"
-        android:src="@drawable/baseline_add_white_18dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
