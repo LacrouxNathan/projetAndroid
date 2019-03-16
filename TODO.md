@@ -13,3 +13,4 @@
 - [ ] 2 langues pour au moins 1 activité
 - [ ] Layout portrait / paysage pour une activité
 - [ ] Activité à propos
+- [ ] Rework header listview

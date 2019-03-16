@@ -8,8 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,20 +19,19 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 
-public class Accueil extends AppCompatActivity {
+public class Accueil_Safe extends AppCompatActivity {
 
     static final int AJOUT_TROUPEAU = 5;
     static final int AJOUTER_RETOUR = 6;
     private static final int REQUEST_PERMISSIONS = 24;
 
-    private CustomListAdapter customListAdapter;
+    private ListAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +93,7 @@ public class Accueil extends AppCompatActivity {
             requestPermissions(new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSIONS);
         } else {
-            startActivityForResult(new Intent(Accueil.this,Ajouter.class),AJOUT_TROUPEAU);
+            startActivityForResult(new Intent(Accueil_Safe.this,Ajouter.class),AJOUT_TROUPEAU);
         }
     }
 
@@ -106,7 +105,6 @@ public class Accueil extends AppCompatActivity {
         Cursor curs = dbr.query("Troupeau", col, "", select, null, null, null);
 
         List<Map<String,String>> listeTroupeaux = new LinkedList<>();
-        List<Bitmap> imagesTroupeaux = new LinkedList<>();
 
         if(curs.moveToFirst()) {
             do {
@@ -118,15 +116,16 @@ public class Accueil extends AppCompatActivity {
                 listeTroupeaux.add(donneesTroupeau);
 
                 Bitmap imageTroupeau = bytesToBitmap(curs.getBlob(curs.getColumnIndexOrThrow("photo")));
-                imagesTroupeaux.add(imageTroupeau);
 
             } while(curs.moveToNext());
         }
         dbr.close();
 
         ListView lv = (ListView) findViewById(R.id.listViewAccueil);
-        this.customListAdapter = new CustomListAdapter(this, listeTroupeaux,imagesTroupeaux);
-        lv.setAdapter(this.customListAdapter);
+
+        this.listAdapter = new SimpleAdapter(this, listeTroupeaux, R.layout.list_row,new String[]{"idT","dateT","photo","taille"},
+                new int[]{R.id.textViewIdT, R.id.textViewDateT, R.id.imageViewTroupeau, R.id.textViewTaille});
+        lv.setAdapter(this.listAdapter);
     }
 
     private static Bitmap bytesToBitmap(byte[] image) {

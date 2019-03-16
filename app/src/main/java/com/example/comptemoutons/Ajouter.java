@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -102,14 +104,15 @@ public class Ajouter extends AppCompatActivity {
 
             // La date du jour
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            String date = formatter.format(new Date());
+            String dateT = formatter.format(new Date());
 
+            // La photo sous forme de BLOB
+            byte[] photo = imageViewToBytes(imageViewNouveauTroupeau);
 
             // INSERTION DANS BDD
             SQLiteDatabase dbw = new ClientDbHelper(this).getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put("dateT",date);
-            byte[] photo = {Byte.MAX_VALUE,Byte.MIN_VALUE,Byte.MAX_VALUE};
+            values.put("dateT",dateT);
             values.put("photo",photo);
             values.put("taille",tailleTroupeau);
             dbw.insert("Troupeau", null, values);
@@ -123,6 +126,13 @@ public class Ajouter extends AppCompatActivity {
             finish();
         }
 
+    }
+
+    private static byte[] imageViewToBytes(ImageView iv) {
+        Bitmap bitmap = ((BitmapDrawable)iv.getDrawable()).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,0,stream);
+        return stream.toByteArray();
     }
 
 }

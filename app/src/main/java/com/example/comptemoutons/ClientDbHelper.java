@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ClientDbHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 8;
+    public static final int DATABASE_VERSION = 10;
     public static final String DATABASE_NAME = "mouton.db";
 
     public final String SQL_CREATE_USER = "CREATE TABLE IF NOT EXISTS User (idU INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, pwd TEXT);";
