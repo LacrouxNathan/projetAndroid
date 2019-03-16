@@ -6,11 +6,11 @@
 - [x] Un toast
 - [x] 1 menu avec au moins un item dans la barre d'action et un item minimum dans le menu surgissant
 - [x] Liste d'items
+- [x] Activité accueil
+- [x] Activité ajouter
+- [x] Enregistrement des ajouts dans BDD SQLite
 
-- [ ] Activité accueil
-- [ ] Activité ajouter
-- [ ] Enregistrement des ajouts dans BDD SQLite
 - [ ] 2 langues pour au moins 1 activité
 - [ ] Layout portrait / paysage pour une activité
 - [ ] Activité à propos
-- [ ] Rework header listview
+- [ ] Rework textviews listview

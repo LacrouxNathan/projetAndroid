@@ -32,7 +32,7 @@ public class Accueil extends AppCompatActivity {
     static final int AJOUTER_RETOUR = 6;
     private static final int REQUEST_PERMISSIONS = 24;
 
-    private CustomListAdapter customListAdapter;
+    private ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,8 @@ public class Accueil extends AppCompatActivity {
             }
         });
 
-       updateListView();
+        this.lv = null;
+        updateListView();
 
     }
 
@@ -124,9 +125,13 @@ public class Accueil extends AppCompatActivity {
         }
         dbr.close();
 
-        ListView lv = (ListView) findViewById(R.id.listViewAccueil);
-        this.customListAdapter = new CustomListAdapter(this, listeTroupeaux,imagesTroupeaux);
-        lv.setAdapter(this.customListAdapter);
+        // si il n'y a pas déjà d'header, on en rajoute un
+        if (this.lv == null) {
+            this.lv = (ListView) findViewById(R.id.listViewAccueil);
+            lv.addHeaderView(getLayoutInflater().inflate(R.layout.list_header, null, false));
+        }
+        CustomListAdapter customListAdapter = new CustomListAdapter(this, listeTroupeaux,imagesTroupeaux);
+        lv.setAdapter(customListAdapter);
     }
 
     private static Bitmap bytesToBitmap(byte[] image) {
