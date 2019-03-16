@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">CompteMoutons</string>
+    <string name="labelPwd">Mot de passe</string>
+    <string name="btnConnexion">Se connecter</string>
+    <string name="menuDeconnexion">Se déconnecter</string>
+    <string name="menuAbout">À Propos</string>
+    <string name="titleAbout">À Propos</string>
+    <string name="titleAjouter">Ajouter un troupeau</string>
+    <string name="titleAccueil">Accueil</string>
+    <string name="titleConnexion">Connexion</string>
+    <string name="labelTaille">Veuillez estimer la taille du troupeau</string>
+    <string name="labelPhoto">Veuillez joindre une photo du troupeau</string>
+    <string name="btnPhoto">Photo…</string>
+    <string name="textHeaderIdt">#</string>
+    <string name="textHeaderDateT">Date</string>
+    <string name="textHeaderPhoto">Photo</string>
+    <string name="textHeaderTaille">Taille</string>
+    <string name="pick_image_intent">Veuillez choisir une source</string>
+    <string name="textImageVide">Vous devez choisir une image !</string>
+    <string name="textErrMdp">Le mot de passe est erroné, les moutons ne seront pas comptés :(</string>
+</resources>

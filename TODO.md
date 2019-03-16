@@ -9,8 +9,7 @@
 - [x] Activité accueil
 - [x] Activité ajouter
 - [x] Enregistrement des ajouts dans BDD SQLite
+- [x] 2 langues pour au moins 1 activité
 
-- [ ] 2 langues pour au moins 1 activité
 - [ ] Layout portrait / paysage pour une activité
 - [ ] Activité à propos
-- [ ] Rework textviews listview

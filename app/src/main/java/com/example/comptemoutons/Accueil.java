@@ -47,7 +47,8 @@ public class Accueil extends AppCompatActivity {
             }
         });
 
-        this.lv = null;
+        this.lv = (ListView) findViewById(R.id.listViewAccueil);
+        lv.addHeaderView(getLayoutInflater().inflate(R.layout.list_header, null, false));
         updateListView();
 
     }
@@ -125,13 +126,8 @@ public class Accueil extends AppCompatActivity {
         }
         dbr.close();
 
-        // si il n'y a pas déjà d'header, on en rajoute un
-        if (this.lv == null) {
-            this.lv = (ListView) findViewById(R.id.listViewAccueil);
-            lv.addHeaderView(getLayoutInflater().inflate(R.layout.list_header, null, false));
-        }
         CustomListAdapter customListAdapter = new CustomListAdapter(this, listeTroupeaux,imagesTroupeaux);
-        lv.setAdapter(customListAdapter);
+        this.lv.setAdapter(customListAdapter);
     }
 
     private static Bitmap bytesToBitmap(byte[] image) {

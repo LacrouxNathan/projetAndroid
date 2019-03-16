@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="5dip"
-    android:weightSum="100">
+    android:weightSum="100"
+    android:gravity="center">
 
     <TextView
         android:id="@+id/textViewIdT"
@@ -41,18 +42,6 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         app:srcCompat="?android:attr/panelBackground" />
-
-    <!-- <TextView
-        android:id="@+id/textViewPhoto"
-        android:layout_width="0dp"
-        android:layout_weight="45"
-        android:layout_height="wrap_content"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:textAlignment="center"
-
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp" /> -->
 
     <TextView
         android:id="@+id/textViewTaille"
