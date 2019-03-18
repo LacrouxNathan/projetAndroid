@@ -18,4 +18,9 @@
     <string name="pick_image_intent">Veuillez choisir une source</string>
     <string name="textImageVide">Vous devez choisir une image !</string>
     <string name="textErrMdp">Le mot de passe est erroné, les moutons ne seront pas comptés :(</string>
+    <string name="textAbout">
+        ~~~ LACROUX Nathan ~~~
+        ~~~ BEDEX Antoine ~~~
+
+    </string>
 </resources>

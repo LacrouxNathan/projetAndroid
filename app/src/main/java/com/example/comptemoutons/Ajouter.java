@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -128,7 +129,7 @@ public class Ajouter extends AppCompatActivity {
 
     }
 
-    private static byte[] imageViewToBytes(ImageView iv) {
+    private static byte[] imageViewToBytes(@NonNull ImageView iv) {
         Bitmap bitmap = ((BitmapDrawable)iv.getDrawable()).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG,0,stream);

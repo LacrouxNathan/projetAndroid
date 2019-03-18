@@ -18,4 +18,10 @@
     <string name="pick_image_intent">Please select a source</string>
     <string name="textImageVide">You must choose an image!</string>
     <string name="textErrMdp">Password incorrect, sheeps will not be counted :(</string>
+    <string name="textAbout">
+        ~~~ LACROUX Nathan ~~~\n
+        ~~~ BEDEX Antoine ~~~\n
+        ### 2019 ###
+
+    </string>
 </resources>

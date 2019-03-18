@@ -15,11 +15,22 @@
         android:roundIcon="@mipmap/ic_sheep_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".About" android:label="@string/titleAbout"></activity>
-        <activity android:name=".Ajouter" android:label="@string/titleAjouter"/>
+        <activity
+            android:name=".About"
+            android:label="@string/titleAbout"
+        />
+
+        <activity
+            android:name=".Ajouter"
+            android:label="@string/titleAjouter"
+            android:screenOrientation="portrait"
+        />
+
         <activity
             android:name=".Accueil"
-            android:label="@string/titleAccueil" />
+            android:label="@string/titleAccueil"
+        />
+
         <activity
             android:name=".Connexion">
             <intent-filter>
@@ -27,6 +38,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
