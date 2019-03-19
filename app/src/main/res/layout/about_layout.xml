@@ -48,7 +48,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/bedex_round" />
+        app:srcCompat="@drawable/bedex_round_min" />
 
     <ImageView
         android:id="@+id/imageViewLacroux"
@@ -60,6 +60,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/lacroux_round" />
+        app:srcCompat="@drawable/lacroux_round_min" />
 
 </android.support.constraint.ConstraintLayout>
