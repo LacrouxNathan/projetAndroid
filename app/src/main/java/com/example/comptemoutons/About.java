@@ -18,6 +18,7 @@ public class About extends AppCompatActivity {
         assert getSupportActionBar() != null; // éviter le nullpointerexception
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        setLink(R.id.imageViewKebab,"https://github.com/Royalix/projetAndroid");
         setLink(R.id.imageViewLacroux,"https://fr.linkedin.com/in/nathan-lacroux");
         setLink(R.id.imageViewBedex,"https://fr.linkedin.com/in/antoine-b%C3%A9dex-a09451170");
 
