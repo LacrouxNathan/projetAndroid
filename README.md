@@ -1,5 +1,7 @@
 # Compte-Moutons
 
+![logo](https://github.com/Royalix/projetAndroid/blob/master/app/src/main/res/drawable/sheep_purple.png)
+
 ## Description
 **Compte-Moutons** est une application, se destinant aux bergers. Elle permet d’améliorer la gestion de troupeaux de moutons. Avec une
 simple photo l’application permet d’estimer la taille du troupeau. Pour des raisons évidentes, nous n’avons pas implémenté la
