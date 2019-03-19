@@ -17,7 +17,6 @@ import java.security.NoSuchAlgorithmException;
 
 public class Connexion extends AppCompatActivity {
 
-    // le mot de passe est $moutons
     private static final String CIPHERED_PWD = "2dc38cc3282736325000b17b763c6ef";
     private SQLiteDatabase dbr; // db de lecture
     private Cursor curs; // curseur de parcours
